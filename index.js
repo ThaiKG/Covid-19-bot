@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const {prefix, token} = require('./config.json');
 const axios = require('axios');
-const db = require('quick.db');
 const fs = require('fs');
 let cooldown = new Set();
 let cdsecs = 30;
@@ -19,9 +18,6 @@ bot.on('ready', () => {
     console.log('I am ready!');
     bot.user.setActivity("the world collapse", {type: 'WATCHING'});
     let allUsers = bot.users.cache.array();
-    for(let i = 0; i < allUsers.length; i++)
-      if(db.get(allUsers[i].id) == null)
-        db.set(allUsers[i].id, {money: 50, items: []});
     
   });
 
@@ -118,16 +114,7 @@ bot.on('message', async msg =>{
     case "status" :
       bot.commands.get('status').execute(msg, args, axios);
     break;
-    case "bal" :
-      if(user){
-        let money = db.get(user.id + ".money")
-        msg.channel.send("<@" + user.id + ">'s balance is " + money + "!");
-      }
-      else{
-
-        msg.channel.send("<@" + author.id + ">'s balance is " + db.fetch(author.id + ".money") + "!");
-      }
-      break;
+    
     case "help" :
       bot.commands.get('help').execute(msg,args,Discord);
       break;  
