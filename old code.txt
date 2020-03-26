@@ -1,0 +1,32 @@
+  if(msg.content.startsWith(prefix + "infect")){
+      if(user)
+       msg.channel.send("<@" + user.id + ">"  + " has been infected by Covid19. They are now subjected to self quarantine for 14 days!");
+      else if(!user)
+      msg.channel.send("<@" + msg.author + ">"  + " has been infected by Covid19. They are now subjected to self quarantine for 14 days!")
+      else{
+        var word = msg.content;
+        var list = word.split(" ");
+        var person = list[list.length()-1];
+        msg.channel.send(person  + " has been infected by Covid19. They are now subjected to self quarantine for 14 days!")
+      }
+      
+    }
+    if(msg.content === prefix + "global"){
+      let getCase = async () => {
+        let response = await axios.get('https://coronavirus-19-api.herokuapp.com/all');
+        let data = response.data;
+        return data;
+      }
+      let dat = await getCase();
+      console.log(dat);
+      msg.channel.send("Covid19 global status: \n \n" + "Cases: " + dat.cases + "\nDeaths: " + dat.deaths+ "\nRecovered: " + dat.recovered);
+    }
+    if(msg.content === prefix + "help"){
+      const embed = new Discord.MessageEmbed();
+      embed.setTitle("Covid19 Bot Commands");
+      embed.addField("Help","help");
+      embed.addField("Status","global");
+      embed.addField("Trolling","infect <@username>");
+      embed.setFooter("Make sure to add the prefix " + "\"" + prefix + "\" at the front of each commands!")
+      msg.channel.send(embed);
+    }

@@ -1,0 +1,17 @@
+{
+  "name": "covid19",
+  "version": "1.0.0",
+  "description": "infecting the world",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thaikyoghoul",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "discord.js": "^12.0.2",
+    "quick.db": "^7.0.0-b22",
+    "random-puppy": "^1.1.0"
+  }
+}
