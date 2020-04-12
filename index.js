@@ -21,11 +21,7 @@ bot.on('ready', () => {
     
   });
 
-bot.on('guildMemberAdd', member =>{
-  if(db.get(member.id) == null){
-    db.set(member.id, {money: 50, items: []});
-  }
-})
+
 
 bot.on('message', async msg =>{
   const user = msg.mentions.users.first();
